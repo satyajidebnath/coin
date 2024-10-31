@@ -1,8 +1,9 @@
 const express = require('express');
 const path = require('path');
+const http = require('http');
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 80; // Change to port 80
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json()); // To parse JSON request bodies
@@ -24,6 +25,7 @@ app.post('/api/toss', (req, res) => {
     res.json({ totalTossCount });
 });
 
-app.listen(PORT, () => {
+// Create an HTTP server and listen on port 80
+http.createServer(app).listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
