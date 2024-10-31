@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coin Toss</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Manrope", sans-serif;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+            background: hsl(210, 46%, 95%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 {
+            color: #03a9f4;
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+
+        .coin {
+            top: 0rem;
+            transform: rotateX(45deg) scale(1);
+            position: relative;
+            width: 16rem;
+            height: 22rem;
+            transform-style: preserve-3d;
+            transform-origin: center;
+            border-radius: 100%;
+        }
+
+        .animate {
+            animation: spin 1.5s cubic-bezier(0.65, 0.05, 0.36, 1);
+        }
+
+        .head, .tail {
+            position: absolute;
+            width: 16rem;
+            height: 22rem;
+            border: 5px dotted #ffb51d;
+            color: white;
+            font-size: 5rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 100%;
+            backface-visibility: hidden;
+        }
+
+        .head {
+            background: #c30d82;
+        }
+
+        .tail {
+            background: black;
+            transform: rotateX(180deg);
+        }
+
+        button {
+            background: #607d8b;
+            color: white;
+            padding: 0.5rem;
+            width: 9rem;
+            font-size: 1.2rem;
+            border: none;
+            outline: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            box-shadow: 3px 3px 10px #00000052;
+            transition: 0.2s ease-in-out;
+            margin: 1rem 0;
+        }
+
+        button:active {
+            background: #869ca7;
+        }
+
+        button:disabled {
+            background: #9e9e9e;
+            cursor: not-allowed;
+        }
+
+        .result-wrapper {
+            background: #ffffff;
+            border-radius: 1rem;
+            padding: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .result {
+            font-size: 1.5rem;
+            color: #333;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            background: hsl(210, 46%, 90%);
+            transition: background 0.3s;
+        }
+
+        .result:hover {
+            background: hsl(210, 46%, 85%);
+        }
+
+        #resetButton {
+            background: #f44336;
+            color: white;
+            padding: 0.5rem;
+            width: 9rem;
+            font-size: 1.2rem;
+            border: none;
+            outline: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            box-shadow: 3px 3px 10px #00000052;
+            transition: 0.2s ease-in-out;
+        }
+
+        #resetButton:hover {
+            background: #e53935;
+        }
+
+        .total-wrapper {
+            margin-top: 1rem;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        @keyframes spin {
+            0% {
+                top: -2rem;
+                transform: rotateX(45deg) scale(1);
+            }
+            50% {
+                transform: rotateX(5000deg) scale(1.8);
+                top: -5rem;
+            }
+            100% {
+                top: 0rem;
+                transform: rotateX(45deg) scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="result-wrapper">
+        <div class="result">
+            <p>Heads:</p>
+            <span id="headsCount">0</span>
+        </div>
+        <div class="result">
+            <p>Tails:</p>
+            <span id="tailsCount">0</span>
+        </div>
+    </div>
+    <h1>Click Button to TOSS!!</h1>
+    <div class="outerbox">
+        <div class="coin">
+            <div class="head">HEAD</div>
+            <div class="tail">TAIL</div>
+        </div>
+    </div>
+    <button id="tossButton">Toss</button>
+    <button id="resetButton">Reset</button>
+    <div class="total-wrapper">
+        <p>Total Tosses: <span id="totalTossCount">0</span></p>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const coin = document.querySelector(".coin");
+            const tossButton = document.getElementById("tossButton");
+            const resetButton = document.getElementById("resetButton");
+            const title = document.querySelector("h1");
+            const headsCountDisplay = document.getElementById("headsCount");
+            const tailsCountDisplay = document.getElementById("tailsCount");
+            const totalTossCountDisplay = document.getElementById("totalTossCount");
+
+            let headsCount = 0;
+            let tailsCount = 0;
+
+            // Function to load total toss count from the server
+            async function loadTotalTossCount() {
+                try {
+                    const response = await fetch('/api/toss-count');
+                    const data = await response.json();
+                    totalTossCountDisplay.innerText = data.totalTossCount;
+                } catch (error) {
+                    console.error('Error fetching toss count:', error);
+                    totalTossCountDisplay.innerText = 'Error';
+                }
+            }
+
+            // Initial load of total toss count
+            loadTotalTossCount();
+
+            tossButton.addEventListener("click", toss);
+            coin.addEventListener("click", toss); // Enable tossing by clicking on the coin
+            resetButton.addEventListener("click", resetCounts);
+
+            async function toss() {
+                tossButton.disabled = true;
+                coin.style.pointerEvents = 'none'; // Disable interactions during the toss
+                title.innerText = "Tossing !!";
+
+                const rand = Math.floor(Math.random() * 2);
+                coin.classList.add("animate");
+
+                setTimeout(async function() {
+                    if (rand === 0) {
+                        title.innerText = "HEAD!!";
+                        coin.style.transform = "rotateX(45deg)";
+                        headsCount++;
+                        headsCountDisplay.innerText = headsCount;
+                    } else {
+                        title.innerText = "TAIL!!";
+                        coin.style.transform = "rotateX(135deg)";
+                        tailsCount++;
+                        tailsCountDisplay.innerText = tailsCount;
+                    }
+
+                    // Update the total toss count on the server
+                    await fetch('/api/toss', { method: 'POST' });
+
+                    // Reload total toss count from the server
+                    loadTotalTossCount();
+
+                    coin.classList.remove("animate");
+                    tossButton.disabled = false;
+                    coin.style.pointerEvents = 'auto'; // Re-enable interactions after the toss
+                }, 1500);
+            }
+
+            function resetCounts() {
+                headsCount = 0;
+                tailsCount = 0;
+                headsCountDisplay.innerText = headsCount;
+                tailsCountDisplay.innerText = tailsCount;
+                title.innerText = "Click Button to TOSS!!";
+            }
+        });
+    </script>
+</body>
+</html>
