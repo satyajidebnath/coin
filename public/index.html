@@ -15,7 +15,7 @@
 
         body {
             width: 100%;
-            min-height: 100vh;
+       
             background: hsl(210, 46%, 95%);
             display: flex;
             flex-direction: column;
@@ -23,14 +23,10 @@
             justify-content: center;
         }
 
-        h1 {
-            color: #03a9f4;
-            font-size: 2.5rem;
-            font-weight: 600;
-        }
+       
 
         .coin {
-            top: 0rem;
+            top: -2rem;
             transform: rotateX(45deg) scale(1);
             position: relative;
             width: 16rem;
@@ -41,7 +37,7 @@
         }
 
         .animate {
-            animation: spin 1.5s cubic-bezier(0.65, 0.05, 0.36, 1);
+            animation: spin 2s cubic-bezier(0.65, 0.05, 0.36, 1);
         }
 
         .head, .tail {
@@ -72,15 +68,16 @@
             background: #607d8b;
             color: white;
             padding: 0.5rem;
-            width: 9rem;
-            font-size: 1.2rem;
+            width: 15rem;
+            font-size: 2.2rem;
             border: none;
             outline: none;
-            border-radius: 0.5rem;
+            border-radius: 2.5rem;
             cursor: pointer;
             box-shadow: 3px 3px 10px #00000052;
             transition: 0.2s ease-in-out;
             margin: 1rem 0;
+margin-top: -60px;
         }
 
         button:active {
@@ -119,7 +116,7 @@
         }
 
         #resetButton {
-            background: #f44336;
+            background: #607d8b;
             color: white;
             padding: 0.5rem;
             width: 9rem;
@@ -130,19 +127,19 @@
             cursor: pointer;
             box-shadow: 3px 3px 10px #00000052;
             transition: 0.2s ease-in-out;
+margin-top: 5px;
         }
 
-        #resetButton:hover {
-            background: #e53935;
-        }
+       
 
         .total-wrapper {
-            margin-top: 1rem;
+           
             font-size: 1.5rem;
-            color: #333;
+            color: #000000;
+font-weight: bold;
         }
 
-        @keyframes spin {
+@keyframes spin {
             0% {
                 top: -2rem;
                 transform: rotateX(45deg) scale(1);
@@ -152,7 +149,7 @@
                 top: -5rem;
             }
             100% {
-                top: 0rem;
+                top: -2rem;
                 transform: rotateX(45deg) scale(1);
             }
         }
@@ -169,14 +166,14 @@
             <span id="tailsCount">0</span>
         </div>
     </div>
-    <h1>Click Button to TOSS!!</h1>
+
     <div class="outerbox">
         <div class="coin">
             <div class="head">HEAD</div>
             <div class="tail">TAIL</div>
         </div>
     </div>
-    <button id="tossButton">Toss</button>
+    <button id="tossButton">Click to Toss</button>
     <button id="resetButton">Reset</button>
     <div class="total-wrapper">
         <p>Total Tosses: <span id="totalTossCount">0</span></p>
@@ -187,7 +184,7 @@
             const coin = document.querySelector(".coin");
             const tossButton = document.getElementById("tossButton");
             const resetButton = document.getElementById("resetButton");
-            const title = document.querySelector("h1");
+           
             const headsCountDisplay = document.getElementById("headsCount");
             const tailsCountDisplay = document.getElementById("tailsCount");
             const totalTossCountDisplay = document.getElementById("totalTossCount");
@@ -215,44 +212,47 @@
             resetButton.addEventListener("click", resetCounts);
 
             async function toss() {
-                tossButton.disabled = true;
-                coin.style.pointerEvents = 'none'; // Disable interactions during the toss
-                title.innerText = "Tossing !!";
+    tossButton.disabled = true; // Disable the button
+    tossButton.innerText = "Tossing !!"; // Change button text to indicate tossing
+    coin.style.pointerEvents = 'none'; // Disable interactions during the toss
+   
 
-                const rand = Math.floor(Math.random() * 2);
-                coin.classList.add("animate");
+    const rand = Math.floor(Math.random() * 2);
+    coin.classList.add("animate");
 
-                setTimeout(async function() {
-                    if (rand === 0) {
-                        title.innerText = "HEAD!!";
-                        coin.style.transform = "rotateX(45deg)";
-                        headsCount++;
-                        headsCountDisplay.innerText = headsCount;
-                    } else {
-                        title.innerText = "TAIL!!";
-                        coin.style.transform = "rotateX(135deg)";
-                        tailsCount++;
-                        tailsCountDisplay.innerText = tailsCount;
-                    }
+    setTimeout(async function() {
+        if (rand === 0) {
+         
+            coin.style.transform = "rotateX(45deg)";
+            headsCount++;
+            headsCountDisplay.innerText = headsCount;
+        } else {
+        
+            coin.style.transform = "rotateX(135deg)";
+            tailsCount++;
+            tailsCountDisplay.innerText = tailsCount;
+        }
 
-                    // Update the total toss count on the server
-                    await fetch('/api/toss', { method: 'POST' });
+        // Update the total toss count on the server
+        await fetch('/api/toss', { method: 'POST' });
 
-                    // Reload total toss count from the server
-                    loadTotalTossCount();
+        // Reload total toss count from the server
+        loadTotalTossCount();
 
-                    coin.classList.remove("animate");
-                    tossButton.disabled = false;
-                    coin.style.pointerEvents = 'auto'; // Re-enable interactions after the toss
-                }, 1500);
-            }
+        coin.classList.remove("animate");
+        tossButton.disabled = false; // Re-enable the button
+        tossButton.innerText = "Toss Again!"; // Reset button text to "Toss"
+        coin.style.pointerEvents = 'auto'; // Re-enable interactions after the toss
+    }, 2000); // Wait for 2.5 seconds before showing the result
+}
+
 
             function resetCounts() {
                 headsCount = 0;
                 tailsCount = 0;
                 headsCountDisplay.innerText = headsCount;
                 tailsCountDisplay.innerText = tailsCount;
-                title.innerText = "Click Button to TOSS!!";
+                title.innerText = "Click to TOSS!!";
             }
         });
     </script>
