@@ -5,155 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coin Toss</title>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Manrope", sans-serif;
-        }
-
-        body {
-            width: 100%;
-       
-            background: hsl(210, 46%, 95%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-       
-
-        .coin {
-            top: -2rem;
-            transform: rotateX(45deg) scale(1);
-            position: relative;
-            width: 16rem;
-            height: 22rem;
-            transform-style: preserve-3d;
-            transform-origin: center;
-            border-radius: 100%;
-        }
-
-        .animate {
-            animation: spin 2s cubic-bezier(0.65, 0.05, 0.36, 1);
-        }
-
-        .head, .tail {
-            position: absolute;
-            width: 16rem;
-            height: 22rem;
-            border: 5px dotted #ffb51d;
-            color: white;
-            font-size: 5rem;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 100%;
-            backface-visibility: hidden;
-        }
-
-        .head {
-            background: #c30d82;
-        }
-
-        .tail {
-            background: black;
-            transform: rotateX(180deg);
-        }
-
-        button {
-            background: #607d8b;
-            color: white;
-            padding: 0.5rem;
-            width: 15rem;
-            font-size: 2.2rem;
-            border: none;
-            outline: none;
-            border-radius: 2.5rem;
-            cursor: pointer;
-            box-shadow: 3px 3px 10px #00000052;
-            transition: 0.2s ease-in-out;
-            margin: 1rem 0;
-margin-top: -60px;
-        }
-
-        button:active {
-            background: #869ca7;
-        }
-
-        button:disabled {
-            background: #9e9e9e;
-            cursor: not-allowed;
-        }
-
-        .result-wrapper {
-            background: #ffffff;
-            border-radius: 1rem;
-            padding: 1rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .result {
-            font-size: 1.5rem;
-            color: #333;
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            background: hsl(210, 46%, 90%);
-            transition: background 0.3s;
-        }
-
-        .result:hover {
-            background: hsl(210, 46%, 85%);
-        }
-
-        #resetButton {
-            background: #607d8b;
-            color: white;
-            padding: 0.5rem;
-            width: 9rem;
-            font-size: 1.2rem;
-            border: none;
-            outline: none;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            box-shadow: 3px 3px 10px #00000052;
-            transition: 0.2s ease-in-out;
-margin-top: 5px;
-        }
-
-       
-
-        .total-wrapper {
-           
-            font-size: 1.5rem;
-            color: #000000;
-font-weight: bold;
-        }
-
-@keyframes spin {
-            0% {
-                top: -2rem;
-                transform: rotateX(45deg) scale(1);
-            }
-            50% {
-                transform: rotateX(5000deg) scale(1.8);
-                top: -5rem;
-            }
-            100% {
-                top: -2rem;
-                transform: rotateX(45deg) scale(1);
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="stylescoin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="result-wrapper">
@@ -161,6 +14,7 @@ font-weight: bold;
             <p>Heads:</p>
             <span id="headsCount">0</span>
         </div>
+        <i class="fas fa-redo reset-icon" id="resetIcon" aria-hidden="true"></i>
         <div class="result">
             <p>Tails:</p>
             <span id="tailsCount">0</span>
@@ -174,87 +28,227 @@ font-weight: bold;
         </div>
     </div>
     <button id="tossButton">Click to Toss</button>
-    <button id="resetButton">Reset</button>
     <div class="total-wrapper">
         <p>Total Tosses: <span id="totalTossCount">0</span></p>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const coin = document.querySelector(".coin");
-            const tossButton = document.getElementById("tossButton");
-            const resetButton = document.getElementById("resetButton");
-           
-            const headsCountDisplay = document.getElementById("headsCount");
-            const tailsCountDisplay = document.getElementById("tailsCount");
-            const totalTossCountDisplay = document.getElementById("totalTossCount");
+    <div class="percentage-wrapper">
+        <div class="total-percentage-bar" id="totalBar">
+            <div class="heads-percentage" id="headsPercentageDiv">
+                <div class="percentage-label">Total Heads</div>
+                <span id="headsCountDisplay">0</span>
+                <div class="percentage-value">
+                    (<span id="headsPercentageDisplay">0%</span>)
+                </div>
+            </div>
+            <div class="tails-percentage" id="tailsPercentageDiv">
+                <div class="percentage-label">Total Tails</div>
+                <span id="tailsCountDisplay">0</span>
+                <div class="percentage-value">
+                    (<span id="tailsPercentageDisplay">0%</span>)
+                </div>
+            </div>
+        </div>
+        <!-- New Section for Last Minute, Last Hour, Last Day -->
+        <div class="recent-tosses">
+            <p>Last Minute Tosses: <span id="lastMinuteTosses">0</span></p>
+            <p>Last Hour Tosses: <span id="lastHourTosses">0</span></p>
+            <p>Last Day Tosses: <span id="lastDayTosses">0</span></p>
+        </div>
+    </div>
 
-            let headsCount = 0;
-            let tailsCount = 0;
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const coin = document.querySelector(".coin");
+        const tossButton = document.getElementById("tossButton");
+        const resetIcon = document.getElementById("resetIcon");
 
-            // Function to load total toss count from the server
-            async function loadTotalTossCount() {
-                try {
-                    const response = await fetch('/api/toss-count');
-                    const data = await response.json();
-                    totalTossCountDisplay.innerText = data.totalTossCount;
-                } catch (error) {
-                    console.error('Error fetching toss count:', error);
-                    totalTossCountDisplay.innerText = 'Error';
-                }
+        const headsCountDisplay = document.getElementById("headsCount");
+        const tailsCountDisplay = document.getElementById("tailsCount");
+        const totalTossCountDisplay = document.getElementById("totalTossCount");
+        const headsCountDisplayBar = document.getElementById("headsCountDisplay");
+        const tailsCountDisplayBar = document.getElementById("tailsCountDisplay");
+        const headsPercentageDisplay = document.getElementById("headsPercentageDisplay");
+        const tailsPercentageDisplay = document.getElementById("tailsPercentageDisplay");
+
+        const lastMinuteTosses = document.getElementById("lastMinuteTosses");
+        const lastHourTosses = document.getElementById("lastHourTosses");
+        const lastDayTosses = document.getElementById("lastDayTosses");
+
+        let headsCount = localStorage.getItem('headsCount') ? parseInt(localStorage.getItem('headsCount')) : 0;
+        let tailsCount = localStorage.getItem('tailsCount') ? parseInt(localStorage.getItem('tailsCount')) : 0;
+
+        // Initialize display with stored values or defaults
+        headsCountDisplay.innerText = headsCount;
+        tailsCountDisplay.innerText = tailsCount;
+
+        // Load total toss count and percentages from the server
+        async function loadTotalTossCount() {
+            try {
+                const response = await fetch('/api/toss-count');
+                const data = await response.json();
+                totalTossCountDisplay.innerText = data.totalTossCount;
+
+                headsCountDisplayBar.innerText = data.headsCount;
+                headsPercentageDisplay.innerText = data.headsPercentage + "%";
+                tailsCountDisplayBar.innerText = data.tailsCount;
+                tailsPercentageDisplay.innerText = data.tailsPercentage + "%";
+
+                // Update the width of the colored sections
+                document.getElementById("headsPercentageDiv").style.width = data.headsPercentage + "%";
+                document.getElementById("tailsPercentageDiv").style.width = data.tailsPercentage + "%";
+
+                // Display recent toss counts
+                lastMinuteTosses.innerText = data.lastMinuteTosses;
+                lastHourTosses.innerText = data.lastHourTosses;
+                lastDayTosses.innerText = data.lastDayTosses;
+
+            } catch (error) {
+                console.error('Error fetching toss count:', error);
+                totalTossCountDisplay.innerText = 'Error';
             }
-
-            // Initial load of total toss count
-            loadTotalTossCount();
-
-            tossButton.addEventListener("click", toss);
-            coin.addEventListener("click", toss); // Enable tossing by clicking on the coin
-            resetButton.addEventListener("click", resetCounts);
-
-            async function toss() {
-    tossButton.disabled = true; // Disable the button
-    tossButton.innerText = "Tossing !!"; // Change button text to indicate tossing
-    coin.style.pointerEvents = 'none'; // Disable interactions during the toss
-   
-
-    const rand = Math.floor(Math.random() * 2);
-    coin.classList.add("animate");
-
-    setTimeout(async function() {
-        if (rand === 0) {
-         
-            coin.style.transform = "rotateX(45deg)";
-            headsCount++;
-            headsCountDisplay.innerText = headsCount;
-        } else {
-        
-            coin.style.transform = "rotateX(135deg)";
-            tailsCount++;
-            tailsCountDisplay.innerText = tailsCount;
         }
 
-        // Update the total toss count on the server
-        await fetch('/api/toss', { method: 'POST' });
-
-        // Reload total toss count from the server
+        // Initial load of total toss count and percentages
         loadTotalTossCount();
 
-        coin.classList.remove("animate");
-        tossButton.disabled = false; // Re-enable the button
-        tossButton.innerText = "Toss Again!"; // Reset button text to "Toss"
-        coin.style.pointerEvents = 'auto'; // Re-enable interactions after the toss
-    }, 2000); // Wait for 2.5 seconds before showing the result
+        tossButton.addEventListener("click", toss);
+        coin.addEventListener("click", toss);
+        resetIcon.addEventListener("click", resetCounts);
+let tossInProgress = false; // Flag to track if a toss is in progress
+        async function toss() {
+ if (tossInProgress) return; // Prevent a new toss if one is already in progress
+
+        tossInProgress = true; // Set flag to true when toss starts
+            tossButton.disabled = true;
+            tossButton.innerText = "Tossing !!";
+            coin.style.pointerEvents = 'none';
+
+            const rand = Math.floor(Math.random() * 2);
+            coin.classList.add("animate");
+
+            setTimeout(async function() {
+                let result;
+                if (rand === 0) {
+                    coin.style.transform = "rotateX(45deg)";
+                    headsCount++;
+                    headsCountDisplay.innerText = headsCount;
+                    result = 'heads';
+                } else {
+                    coin.style.transform = "rotateX(135deg)";
+                    tailsCount++;
+                    tailsCountDisplay.innerText = tailsCount;
+                    result = 'tails';
+                }
+
+                // Store updated counts in localStorage
+                localStorage.setItem('headsCount', headsCount);
+                localStorage.setItem('tailsCount', tailsCount);
+
+                // Send toss result to the server
+                await fetch('/api/toss', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ result })
+                });
+
+                // Load updated totals from the server
+                loadTotalTossCount();
+
+                coin.classList.remove("animate");
+                tossButton.disabled = false;
+                tossButton.innerText = "Toss Again!";
+                coin.style.pointerEvents = 'auto';
+tossInProgress = false; // Reset flag after toss is complete
+            }, 2000);
+        }
+
+        function resetCounts() {
+            headsCount = 0;
+            tailsCount = 0;
+            headsCountDisplay.innerText = headsCount;
+            tailsCountDisplay.innerText = tailsCount;
+
+            // Reset counts in localStorage
+            localStorage.setItem('headsCount', headsCount);
+            localStorage.setItem('tailsCount', tailsCount);
+        }
+// Listen for Spacebar or Enter key press to trigger the toss
+    document.addEventListener("keydown", function(event) {
+        if (event.key === " " || event.key === "Enter") {
+            event.preventDefault();  // Prevent default action like scrolling when Space is pressed
+            toss();  // Trigger the toss function
+        }
+    });
+
+    });
+
+    document.getElementById('resetIcon').addEventListener('click', function() {
+        this.classList.toggle('rotated');
+setTimeout(() => {
+            this.classList.remove('rotated');
+        }, 500);
+    });
+</script>
+
+<style>
+    .percentage-wrapper {
+        width: 100%;
+    }
+
+    .total-percentage-bar {
+        height: 70px;
+        border-radius: 5px;
+        background-color: #e0e0e0;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .heads-percentage {
+        background-color: #c30d82;
+        height: 100%;
+        text-align: center;
+        color: white;
+        position: absolute;
+        left: 0;
+    }
+
+    .tails-percentage {
+        background-color: black;
+        height: 100%;
+        text-align: center;
+        color: white;
+        position: absolute;
+        right: 0;
+    }
+
+    .heads-percentage span,
+    .tails-percentage span {
+        display: inline-block;
+        margin: 0 5px;
+    }
+
+    .percentage-label {
+        background: white;
+        color: black;
+        font-weight: bold;
+        font-size: 19px;
+    }
+
+    .recent-tosses p {
+        font-size: 26px;
+font-weight: bold;
+text-align: center;
+        margin: 5px 0;
+    }
+/* Rotation effect */
+.reset-icon.rotated {
+    transform: rotate(3600deg);
+    transition: transform 0.5s ease; /* Smooth transition for rotation */
 }
 
-
-            function resetCounts() {
-                headsCount = 0;
-                tailsCount = 0;
-                headsCountDisplay.innerText = headsCount;
-                tailsCountDisplay.innerText = tailsCount;
-                title.innerText = "Click to TOSS!!";
-            }
-        });
-    </script>
+</style>
 </body>
 </html>
