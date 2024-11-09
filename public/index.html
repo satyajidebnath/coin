@@ -1,14 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="flip a coin, coin flipper, coin toss, coin toss online, 50/50 coin toss, coin flip simulator, coin toss simulator, coin flipper simulator, coin toss decision maker, coin flipper online, flip a coin online, random coin toss, heads or tails, virtual coin flip, coin flipper tool, coin toss generator, free coin flip, online coin flip, random decision maker, make decisions with a coin toss, fair coin toss, quick decision maker, coin flipping tool, coin toss for choices, heads tails flip, instant coin flip, flip a coin for decisions, coin flipping for games, virtual heads or tails, decisions with coin toss, randomized coin flip tool, coin flip game, coin flip simulator, flip coin app, toss a coin online, flip a coin for free, random choice generator, heads or tails online, flip coin decision maker, coin flipper for games, decision maker coin toss, online heads or tails, flip a coin to decide, fair coin flip, random heads or tails, online random decision maker, quick coin toss, flip a coin tool, make decisions fast, coin toss choice maker, instant decision maker, flip a virtual coin, coin flip generator, online flip a coin, flip a coin decision tool, toss a coin app, coin toss decision maker, heads tails decision, free heads or tails tool, random toss decision, flip a coin game, coin flip choice, flip a coin for decision making, coin flip randomizer, quick random decision, flip a coin right now, heads or tails decision maker, online coin decision, flip a coin for choices, flip for decisions, random decision toss, fair random coin toss, heads or tails randomizer, quick coin flip tool, decision flip app, coin flipping app, heads tails flip online, heads tails virtual coin, decision making with coin toss, online random coin flip, fair virtual coin toss, flip a coin decision helper, coin toss online tool, flip a coin randomizer, flip decision maker, decision generator coin toss, heads or tails generator, coin toss flip generator, virtual coin flipping tool, flip a coin now, online coin flipper, coin toss flip simulator, free coin toss tool, coin toss game online, coin toss for random decisions, flip a coin for fun, heads or tails generator tool, flip coin heads tails, random coin decision maker, quick online coin toss, decision maker online coin flip, coin flip app free, online coin flipper, coin toss heads or tails online, flip for random decision, virtual coin toss heads tails, fair flip a coin online" />
+  <meta name="description" content="Flip a coin online for heads or tails! Use our free, random coin toss tool for quick decisions, games, choices, and more. Try the coin flipper now!" />
+  <meta name="author" content="Coin Flipper" />
+
+  <title>Just Coin Flipper - Flip a Coin to Get Heads or Tails!</title>
+
+
+<link rel="icon" href="images/justcoinflipper.png" type="image/png">
+
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
+
+  <!-- font awesome style -->
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
+  <!-- nice select -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha256-mLBIhmBvigTFWPSCtvdu6a76T+3Xyt+K571hupeFLg4=" crossorigin="anonymous" />
+  <!-- slidck slider -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" integrity="sha256-UK1EiopXIL+KVhfbFa8xrmAWPeBjMVdvYMYkTAEv/HI=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css.map" integrity="undefined" crossorigin="anonymous" />
+
+
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="css/responsive.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+  <div class="hero_area">
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container">
+          <a class="navbar-brand" href="/">
+            <span>
+              Just Coin Flipper
+            </span>
+          </a>
+          <div class="" id="">
+                        
+            <div class="custom_menu-btn">
+              <button onclick="openNav()">
+                <img src="images/menu.png" alt="">
+              </button>
+            </div>
+            <div id="myNav" class="overlay">
+              <div class="overlay-content">
+                <a href="/">Home</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="privacy-policy.html">Privacy Policy</a>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coin Toss</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="stylescoin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body>
+<body1>
+<audio id="coinFlipSound" src="coinflippersound.mp3" preload="auto"></audio>
     <div class="result-wrapper">
         <div class="result">
             <p>Heads:</p>
@@ -27,7 +117,7 @@
             <div class="tail">TAIL</div>
         </div>
     </div>
-    <button id="tossButton">Click to Toss</button>
+    <button11 id="tossButton">Click to Toss</button11>
     <div class="total-wrapper">
         <p>Total Tosses: <span id="totalTossCount">0</span></p>
     </div>
@@ -124,6 +214,11 @@ let tossInProgress = false; // Flag to track if a toss is in progress
             tossButton.innerText = "Tossing !!";
             coin.style.pointerEvents = 'none';
 
+
+// Play the coin flip sound
+        const coinFlipSound = document.getElementById("coinFlipSound");
+        coinFlipSound.play(); // Play the sound
+
             const rand = Math.floor(Math.random() * 2);
             coin.classList.add("animate");
 
@@ -175,8 +270,14 @@ tossInProgress = false; // Reset flag after toss is complete
             localStorage.setItem('headsCount', headsCount);
             localStorage.setItem('tailsCount', tailsCount);
         }
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === " ") {
+        event.preventDefault();  // Prevent scrolling when Spacebar is pressed
+    }
+});
 // Listen for Spacebar or Enter key press to trigger the toss
-    document.addEventListener("keydown", function(event) {
+    document.addEventListener("keyup", function(event) {
         if (event.key === " " || event.key === "Enter") {
             event.preventDefault();  // Prevent default action like scrolling when Space is pressed
             toss();  // Trigger the toss function
@@ -199,7 +300,7 @@ setTimeout(() => {
     }
 
     .total-percentage-bar {
-        height: 70px;
+        height: 77px;
         border-radius: 5px;
         background-color: #e0e0e0;
         position: relative;
@@ -250,5 +351,226 @@ text-align: center;
 }
 
 </style>
+</body1>
+
+          
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+  <!-- about section -->
+
+  <section class="about_section layout_padding">
+    <div class="container">
+      <div class="col-md-11 col-lg-10 mx-auto">
+        <div class="heading_container heading_center">
+          <h2>
+            How an Online Coin Toss Works
+          </h2>
+        </div>
+        <div class="box">
+          <div class="col-md-7 mx-auto">
+            <div class="img-box">
+              <img src="images/flipacoin.png" class="box-img" alt="">
+            </div>
+          </div>
+          <div class="detail-box">
+         
+
+    <h2>Random Number Generation</h2>
+    <p>
+        Online coin tosses rely on <strong>random number generation (RNG)</strong> algorithms. A computer or mobile device uses an RNG to produce a random number that determines the outcome.
+    </p>
+    <p>
+        Typically, this will be either a <strong>0</strong> or a <strong>1</strong>. For example:
+    </p>
+    <ul>
+        <li><strong>0</strong> could represent "Heads."</li>
+        <li><strong>1</strong> could represent "Tails."</li>
+    </ul>
+    <p>
+        The outcome is determined by the random number generator (software), which is designed to ensure fairness and unpredictability, mimicking the randomness of a physical coin flip.
+    </p>
+
+    <h2>Simulated Coin Toss Animation</h2>
+    <p>
+        Many online coin-flip tools will visually simulate the process of tossing a coin, including spinning or flipping animations to make it feel more like the real thing.
+    </p>
+    <p>
+        While the animation is fun and adds suspense, the outcome is still determined by the RNG, not the visual movement.
+    </p>
+
+    <h2>Fairness and Randomness</h2>
+    <p>
+        A properly implemented online coin flip is designed to be fair, as the RNG ensures an equal probability for both "Heads" and "Tails."
+    </p>
+    <p>
+        For highly trusted online coin flips (e.g., in gaming or other scenarios), some websites and apps use verifiable RNG methods that can be audited for fairness.
+    </p>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end about section -->
+
+  <!-- news section -->
+
+<section class="news_section">
+  <div class="container">
+    <div class="heading_container heading_center">
+      <h2>
+        Digital Spin on a Classic Tradition
+      </h2>
+    </div>
+    <div class="row">
+      <!-- First Column with 5 paragraphs -->
+      <div class="col-md-6">
+        <div class="box">
+          <div class="detail-box">
+            <h4><strong>What Makes Coin Flipping Unique?</strong></h4>
+            <p><strong>Coin flipping</strong> is a simple yet powerful decision-making tool that has stood the test of time. It’s impartial, quick, and brings an element of chance into any situation. Whether you’re deciding between two choices or breaking a tie, flipping a coin adds a fun, random element to everyday decisions. Our <strong>online coin-flipping web app</strong> brings this age-old tradition into the digital world—fast, easy, and accessible anytime, anywhere. Experience the magic of a <strong>coin flip online</strong> with just a click!</p>
+            <br>
+            <h4><strong>Coin Flipping in Your Daily Life</strong></h4>
+            <p><strong>Coin flipping</strong> is more than just a game of chance—it’s a way to resolve small decisions quickly and fairly. Whether you’re choosing where to eat, who goes first in a game, or deciding between two equally good options, flipping a coin offers a quick solution without the stress of overthinking. With our <strong>coin flipper app</strong>, <strong>coin tossing</strong> becomes as easy as a click, giving you more time to focus on what really matters. Flip a coin anytime, anywhere!</p>
+            <br>
+            <h4><strong>Instant, Fun, and Fair Decision Making</strong></h4>
+            <p>Sometimes, the simplest decisions can be the hardest to make. Our <strong>online coin-flipping app</strong> offers an easy, fair, and fun way to make decisions in seconds. Just <strong>flip a coin online</strong>, and let chance help you find your answer. Whether it's for fun or practicality, we bring the randomness and simplicity of a <strong>coin toss</strong> right to your fingertips! It's the easiest way to make a <strong>50/50 coin toss</strong> decision.</p>
+            <br>
+            <h4><strong>Decision-Making Made Simple</strong></h4>
+            <p>Life’s toughest decisions often come down to two choices. Our <strong>coin-flipping app</strong> makes those moments a little easier by giving you a fair, unbiased solution in just seconds. Whether you’re at home, at work, or on the go, <strong>flip a coin</strong> has never been easier or more convenient. Get instant results with no hassle—just flip, and let fate do the rest. Try our <strong>coin toss online</strong> tool for fast decisions!</p>
+            <br>
+            <h4><strong>Flip a Coin, Make a Choice</strong></h4>
+            <p>Need a quick way to settle a debate or choose between two options? Our <strong>online coin-flipping web app</strong> is the fastest and most fun way to make decisions. Whether you’re deciding who sits where, which game to play, or even who takes the last piece of pizza, let a virtual coin take the pressure off and decide for you! It’s an easy and quick <strong>coin toss</strong> for any situation.</p>
+            <br>
+          </div>
+        </div>
+      </div>
+
+      <!-- Second Column with 5 paragraphs -->
+      <div class="col-md-6">
+        <div class="box">
+          <div class="detail-box">
+            <h4><strong>Add Fun to Your Decisions</strong></h4>
+            <p>Decision fatigue is real, but <strong>coin flipping</strong> can turn a tough choice into an enjoyable moment. With our web app, you can instantly <strong>flip a coin</strong> with the click of a button—perfect for making decisions in a fun and lighthearted way. It’s more than just flipping for the sake of it—it’s a small moment of randomness that adds excitement to everyday choices. Try a <strong>coin flip online</strong> and add some fun to your decisions!</p>
+            <br>
+            <h4><strong>From Decisions to Games: Endless Possibilities</strong></h4>
+            <p>A <strong>coin flip</strong> isn’t just for decision-making—it’s a game in itself. Whether you’re deciding a game’s outcome, choosing between two options, or just flipping for fun, our <strong>online coin-flipping app</strong> offers endless possibilities. Flip as many times as you like, and let fate determine the outcome. Simple, fast, and always fun with a <strong>50/50 coin toss</strong> option!</p>
+            <br>
+            <h4><strong>Instant Coin Flipping: Get Your Decision in Seconds</strong></h4>
+            <p>Looking for a quick way to make a decision? Our <strong>coin flipper online tool</strong> is the solution! In just a click, you can simulate a real <strong>coin flip</strong> and get an immediate, random result. Whether you're choosing teams, deciding what to do next, or just having fun with friends, flipping a coin digitally has never been easier. Make decision-making simple with our reliable <strong>coin flipper web app</strong>.</p>
+            <br>
+            <h4><strong>Coin Flipping Made Easy with Our Online Flipper Tool</strong></h4>
+            <p>No need to search for a physical coin—use our <strong>coin flipper online tool</strong> to get a quick, random result anytime you need to make a choice. Our web app mimics the experience of a real <strong>coin toss</strong>, making it an exciting, fair way to resolve decisions on the spot. Whether you need to decide on a restaurant, a game, or even who should take the last piece of pizza, our <strong>coin flipper app</strong> makes it easy to get the job done with a <strong>50/50 coin toss</strong> every time!</p>
+            <br>
+            <h4><strong>Make Fair and Fun Decisions with Coin Flipping</strong></h4>
+            <p>Sometimes, a quick flip of a coin is all you need to make the right decision. Our <strong>online coin flipper</strong> brings this timeless tradition into the modern world. With just a click, you can <strong>flip a coin online</strong> and get an instant decision. Use it for everything from casual games to serious decision-making. The <strong>coin flipper web app</strong> is perfect for anyone who needs a random, unbiased result in a matter of seconds.</p>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- end news section -->
+
+  <!-- client section -->
+
+  <section class="client_section layout_padding">
+    <div class="container">
+      <div class="col-md-11 col-lg-10 mx-auto">
+        <div class="heading_container heading_center">
+          <h2>
+            History of Coin Toss
+          </h2>
+        </div>
+        <p><strong>Coin flipping</strong>, a simple yet widely recognized practice, has a <strong>rich history</strong> that dates back thousands of years. The <strong>origins of coin flipping</strong> can be traced to ancient civilizations, where coins were not only used as a form of currency but also as a tool for <strong>decision-making</strong> and resolving disputes. The earliest recorded instances of <strong>coin flipping</strong> come from ancient <strong>Greek</strong> and <strong>Roman cultures</strong>, where a <strong>coin toss</strong> would be flipped to make important decisions, such as choosing leaders, settling arguments, or determining the outcome of games. These early <strong>coin flips</strong> often relied on the symbolism of the coin itself, with heads representing authority or divinity, and tails symbolizing the unknown or lower status.</p><br>
+
+<p>During the <strong>Middle Ages</strong>, <strong>coin flipping</strong> grew in prominence as a form of <strong>legal judgment</strong> and conflict resolution. In some cultures, a <strong>coin toss</strong> was used to decide the outcomes of trials, determining who would win in legal disputes or what course of action to take when no clear evidence was available. As the practice spread through <strong>European</strong> and <strong>American</strong> societies, <strong>coin flipping</strong> became a widely accepted method for making fair and quick decisions. By the <strong>17th century</strong>, it was common for <strong>coin flipping</strong> to be used to settle debates, divide property, or even choose representatives in various community matters.</p><br>
+
+<p>As time progressed, <strong>coin flipping</strong> began to be associated with the <strong>randomness</strong> and <strong>chance</strong> of decision-making. In the <strong>19th</strong> and early <strong>20th centuries</strong>, <strong>coin flipping</strong> became a staple in sports, particularly in games like football and baseball, where it was used to determine the side of the field or the first possession. The <strong>coin toss</strong> became a symbol of fairness, providing an unbiased way of deciding outcomes in highly competitive environments.</p><br>
+
+<p>In modern times, <strong>coin flipping</strong> has taken on new dimensions with the advent of technology. Today, many online platforms and <strong>mobile apps</strong> offer virtual <strong>coin flips</strong>, allowing people to perform a <strong>digital coin toss</strong> with the same randomness and fairness as the traditional physical coin. The rise of online <strong>coin flipping</strong> has made the practice more accessible to people worldwide, adding a new layer of convenience and entertainment. Online <strong>coin flips</strong> are often integrated into digital games, decision-making tools, or even as a quick way to break ties in competitions.</p><br>
+
+<p>The simplicity and ease of <strong>online coin flipping</strong> have made it an essential feature for various purposes, from choosing sides in casual games to decision-making in serious business or personal matters. As we continue into the <strong>digital age</strong>, online <strong>coin flipping</strong> remains a popular and trusted method for resolving decisions, while still holding its timeless appeal as a symbol of <strong>fate</strong>, <strong>luck</strong>, and chance.</p>
+   
+  </section>
+
+  <!-- end client section -->
+
+  <div class="footer_container">
+    <!-- info section -->
+    <section class="info_section ">
+      <div class="container">
+        
+        <div class="info_links">
+          <ul>
+            <li class="active">
+              <a href="index.html">
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="about.html">
+                About
+              </a>
+            </li>
+            <li>
+              <a class="" href="contact.html">
+                Contact
+              </a>
+            </li>
+            <li>
+              <a class="" href="pirvacy-policy.html">
+                Privacy Policy
+              </a>
+            </li>
+          </ul>
+        </div>
+
+    </section>
+    <!-- end info_section -->
+
+
+    <!-- footer section -->
+    <footer class="footer_section">
+      <div class="container">
+        <p>
+          &copy; <span id="displayYear"></span> All Rights Reserved By
+          Justcoinflipper.com      </p>
+      </div>
+    </footer>
+    <!-- footer section -->
+
+  </div>
+
+  <!-- bootstrap js -->
+  <script src="js/bootstrap.js"></script>
+  <!-- slick  slider -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
+  <!-- nice select -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js" integrity="sha256-Zr3vByTlMGQhvMfgkQ5BtWRSKBGa2QlspKYJnkjZTmo=" crossorigin="anonymous"></script>
+  <!-- custom js -->
+  <script src="js/custom.js"></script>
+
+
 </body>
+
 </html>
