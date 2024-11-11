@@ -18,12 +18,12 @@ body1 {
     top: -2rem;
     transform: rotateX(45deg) scale(1);
     position: relative;
-    width: 12rem;
-    height: 17rem;
+    width: 14rem;
+    height: 20rem;
     transform-style: preserve-3d;
     transform-origin: center;
     border-radius: 100%;
-margin: 25px;
+margin: 10px;
 z-index: 1;
 }
 
@@ -33,11 +33,11 @@ z-index: 1;
 
 .head, .tail {
     position: absolute;
-    width: 12rem;
-    height: 17rem;
+    width: 14rem;
+    height: 20rem;
     border: 5px dotted #ffb51d;
     color: white;
-    font-size: 4rem;
+    font-size: 5rem;
     font-weight: 800;
     display: flex;
     align-items: center;
